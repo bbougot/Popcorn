@@ -1,0 +1,181 @@
+﻿<dialogs:CustomDialog
+    x:Class="Popcorn.Dialogs.DownloadSettingsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:command="http://www.galasoft.ch/mvvmlight"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:controls1="clr-namespace:Popcorn.Controls"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:dialogs1="clr-namespace:Popcorn.ViewModels.Dialogs"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance dialogs1:DownloadSettingsDialogViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    Background="Black"
+    Opacity="0.8"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding Path=LoadSubtitlesCommand}" PassEventArgsToCommand="False" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <converters:ValueToBrushConverter x:Key="ValueToBrushConverter" />
+                <converters:TorrentHealthToLabelConverter x:Key="TorrentHealthToLabelConverter" />
+                <converters:BoolToInverseVisibilityConverter x:Key="BoolToInverseVisibilityConverter" />
+                <converters:NullAsVisibilityConverter x:Key="NullAsVisibilityConverter" />
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            FontSize="26"
+            FontWeight="Normal"
+            Foreground="White"
+            Text="{lex:LocText OptionsLabel}"
+            TextTrimming="CharacterEllipsis"
+            Typography.Capitals="SmallCaps" />
+        <Grid
+            Grid.Row="1"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText SubtitlesLabel}"
+                    TextTrimming="CharacterEllipsis" />
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <controls:ProgressRing
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        IsActive="True"
+                        Visibility="{Binding LoadingSubtitles, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
+                    <controls:SplitButton
+                        Width="130"
+                        Height="35"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        DisplayMemberPath="LanguageName"
+                        ItemsSource="{Binding Media.AvailableSubtitles}"
+                        SelectedItem="{Binding Media.SelectedSubtitle, UpdateSourceTrigger=PropertyChanged}">
+                        <controls:SplitButton.Icon>
+                            <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
+                        </controls:SplitButton.Icon>
+                    </controls:SplitButton>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText QualityLabel}"
+                    TextTrimming="CharacterEllipsis" />
+                <controls1:Windows10ToggleSwitch
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    IsChecked="{Binding Media.WatchInFullHdQuality}"
+                    IsEnabled="{Binding Media.FullHdAvailable}"
+                    OffLabel="{Binding HdLabel}"
+                    OnLabel="{Binding SdLabel}" />
+            </StackPanel>
+            <StackPanel Grid.Column="5" Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText InformationsLabel}"
+                    TextTrimming="CharacterEllipsis" />
+                <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="Seeders:" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Foreground="GhostWhite"
+                            Text="{Binding SelectedTorrent.Seeds}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="Peers:" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Foreground="GhostWhite"
+                            Text="{Binding SelectedTorrent.Peers}" />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal"
+                        Visibility="{Binding SelectedTorrent.Size, Converter={StaticResource NullAsVisibilityConverter}}">
+                        <TextBlock Foreground="White" Text="Size:" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Foreground="GhostWhite"
+                            Text="{Binding SelectedTorrent.Size}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="{lex:LocText HealthLabel}" />
+                        <TextBlock Foreground="White" Text=":" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Foreground="{Binding Path=TorrentHealth, Converter={StaticResource ValueToBrushConverter}, ConverterParameter='0|10', UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding Path=TorrentHealth, Converter={StaticResource TorrentHealthToLabelConverter}, ConverterParameter='0|10', UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,20,0,20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="35"
+                HorizontalAlignment="Center"
+                controls:ControlsHelper.ContentCharacterCasing="Normal"
+                Command="{Binding Path=DownloadCommand}"
+                Content="{lex:LocText WatchButton}"
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
+            <Button
+                Width="100"
+                Height="35"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Center"
+                controls:ControlsHelper.ContentCharacterCasing="Normal"
+                Command="{Binding Path=CancelCommand}"
+                Content="{lex:LocText CancelLabel}"
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
+        </StackPanel>
+    </Grid>
+</dialogs:CustomDialog>

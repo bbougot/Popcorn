@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Popcorn.Controls.Movie.MovieNumberSummary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="CurrentMovies" Visibility="Collapsed" />
+            <TextBlock
+                x:Name="Movies"
+                Margin="5,0,0,0"
+                Text="{lex:LocText MoviesWord}"
+                Visibility="{Binding Visibility, ElementName=CurrentMovies}" />
+            <TextBlock
+                x:Name="Of"
+                Margin="5,0,0,0"
+                Text="{lex:LocText OfWord}"
+                Visibility="{Binding Visibility, ElementName=MaxMovies}" />
+            <TextBlock
+                x:Name="MaxMovies"
+                Margin="5,0,0,0"
+                Visibility="Collapsed" />
+        </StackPanel>
+    </Grid>
+</UserControl>

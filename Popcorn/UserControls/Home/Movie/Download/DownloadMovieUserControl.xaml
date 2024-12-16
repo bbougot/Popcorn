@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Movie.Download.DownloadMovieUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:controls1="clr-namespace:Popcorn.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:download="clr-namespace:Popcorn.ViewModels.Pages.Home.Movie.Download"
+    xmlns:helpers="clr-namespace:Popcorn.Helpers"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:movie="clr-namespace:Popcorn.Controls.Movie"
+    d:DataContext="{d:DesignInstance download:DownloadMovieViewModel}"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AnimationContentOnMovieDownloading" TargetType="{x:Type Grid}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsDownloadingMovie}" Value="False">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0.0"
+                                        Duration="0:0:0.5" />
+                                    <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.5" Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Collapsed}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1.0"
+                                        Duration="0:0:0.5" />
+                                    <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.5" Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Center"
+        Opacity="1.0"
+        Style="{StaticResource AnimationContentOnMovieDownloading}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Vertical">
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18">
+                <controls1:DownloadProgress
+                    Title="{Binding Movie.Title}"
+                    Progress="{Binding MovieDownloadProgress}"
+                    Rate="{Binding MovieDownloadRate}"
+                    Type="Movie" />
+            </Label>
+            <StackPanel
+                Margin="0,10,0,10"
+                HorizontalAlignment="Center"
+                Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:LocText PeersLabel}" />
+                    <TextBlock Text=": " />
+                    <TextBlock Margin="5,0,0,0" Text="{Binding NbPeers}" />
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <TextBlock Text="{lex:LocText SeedersLabel}" />
+                    <TextBlock Text=": " />
+                    <TextBlock Margin="5,0,0,0" Text="{Binding NbSeeders}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <controls:MetroProgressBar
+            Grid.Row="1"
+            Grid.Column="2"
+            Height="7"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Stretch"
+            Foreground="{StaticResource MahApps.Brushes.Accent}"
+            Maximum="{Binding Source={x:Static helpers:Constants.MinimumMovieBuffering}}"
+            Minimum="0.0"
+            Value="{Binding MovieDownloadProgress}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Width="100"
+            Height="30"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            controls:ControlsHelper.ContentCharacterCasing="Normal"
+            Command="{Binding StopDownloadingMovieCommand}"
+            Content="{lex:LocText CancelButton}"
+            Style="{DynamicResource MahApps.Styles.Button.Square}" />
+    </Grid>
+</UserControl>

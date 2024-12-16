@@ -1,0 +1,92 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Settings.Help.HelpUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Popcorn.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:local="clr-namespace:Popcorn.UserControls.Home.Settings.Help"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding Help, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <controls:AnimatedScrollViewer
+        x:Name="Scroller"
+        Margin="15,20"
+        HorizontalScrollBarVisibility="Auto"
+        PreviewMouseWheel="OnPreviewMouseWheelScroller"
+        VerticalScrollBarVisibility="Disabled">
+        <controls:CustomWrapPanel Orientation="Vertical">
+            <StackPanel Margin="20,10">
+                <Label
+                    Content="{lex:LocText ShortcutsLabel}"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
+                <StackPanel
+                    Margin="5,10,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="&#x2191;"
+                        Style="{StaticResource NormalKey}" />
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#E2E2E2"
+                        Text="{lex:LocText ScrollUpShortcut}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="5,10,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="&#x2193;"
+                        Style="{StaticResource NormalKey}" />
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#E2E2E2"
+                        Text="{lex:LocText ScrollDownShortcut}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="5,10,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <controls:CombiLabel
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="Ctrl"
+                        Content2="v"
+                        Style="{StaticResource Hotkey}" />
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#E2E2E2"
+                        Text="{lex:LocText ParseMagnetShortcut}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="5,10,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <controls:CombiLabel
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="Ctrl"
+                        Content2="f"
+                        Style="{StaticResource Hotkey}" />
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#E2E2E2"
+                        Text="{lex:LocText SearchShortcut}" />
+                </StackPanel>
+            </StackPanel>
+        </controls:CustomWrapPanel>
+    </controls:AnimatedScrollViewer>
+</UserControl>

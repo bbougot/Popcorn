@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
+    <DataTemplate x:Key="FlyoutHeaderTemplate" x:Shared="False">
+        <DockPanel
+            x:Name="dpHeader"
+            VerticalAlignment="Center"
+            LastChildFill="True">
+            <Button
+                x:Name="PART_BackButton"
+                Width="34"
+                Height="34"
+                Margin="2,4,2,2"
+                VerticalAlignment="Center"
+                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}, Path=CloseCommand, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}, Path=CloseCommandParameter, Mode=OneWay}"
+                DockPanel.Dock="Left"
+                FontFamily="Segoe UI Symbol"
+                FontSize="16"
+                Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}, Path=Foreground}"
+                IsCancel="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Flyout}}, Path=CloseButtonIsCancel}"
+                Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Flyout}}, Path=CloseButtonVisibility}">
+                <iconPacks:PackIconModern Kind="ArrowLeft" />
+            </Button>
+            <TextBlock
+                x:Name="PART_BackHeaderText"
+                Margin="15,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="24"
+                Text="{Binding}"
+                Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Flyout}}, Path=TitleVisibility}" />
+        </DockPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Position, RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}}" Value="Left">
+                <Setter TargetName="PART_BackHeaderText" Property="Margin" Value="0,0,15,0" />
+                <Setter TargetName="PART_BackHeaderText" Property="TextAlignment" Value="Right" />
+                <Setter TargetName="PART_BackButton" Property="DockPanel.Dock" Value="Right" />
+                <Setter TargetName="PART_BackButton" Property="LayoutTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="-1" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Position, RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}}" Value="Top">
+                <Setter TargetName="PART_BackButton" Property="LayoutTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="-90" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Position, RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}}" Value="Bottom">
+                <Setter TargetName="PART_BackButton" Property="LayoutTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="90" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

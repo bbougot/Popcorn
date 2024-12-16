@@ -1,0 +1,150 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachedProperties="clr-namespace:Popcorn.AttachedProperties"
+    xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:controls1="clr-namespace:Popcorn.Controls">
+
+    <SolidColorBrush x:Key="TabItemPanelBackgroundBrush" Color="#273440" />
+    <SolidColorBrush x:Key="TabItemBackgroundIsSelectedBrush" Color="{StaticResource Gray2}" />
+    <SolidColorBrush x:Key="TabItemBackgroundIsMouseOverBrush" Color="{StaticResource Gray5}" />
+    <SolidColorBrush x:Key="TabItemForegroundIsSelectedBrush" Color="{StaticResource IdealForegroundColor}" />
+    <SolidColorBrush x:Key="TabItemSelectorBrush" Color="DarkRed" />
+    <SolidColorBrush x:Key="TabControlBackgroundBrush" Color="Black" />
+
+    <Style x:Key="HomeTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <controls1:Ripple
+                        x:Name="PART_Ripple"
+                        Margin="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        Background="{TemplateBinding Background}"
+                        Feedback="#FFB6B6B6"
+                        SnapsToDevicePixels="True">
+                        <Grid
+                            x:Name="PART_Grid"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="4" />
+                            </Grid.RowDefinitions>
+                            <ContentPresenter
+                                x:Name="PART_HeaderContent"
+                                Grid.Row="0"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                ContentSource="Header"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Rectangle
+                                x:Name="PART_Selector"
+                                Grid.Row="1"
+                                HorizontalAlignment="Stretch"
+                                Fill="{StaticResource TabItemSelectorBrush}"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </controls1:Ripple>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Trigger.Setters>
+                                <Setter TargetName="PART_Selector" Property="Visibility" Value="Visible" />
+                            </Trigger.Setters>
+                        </Trigger>
+                        <Trigger SourceName="PART_Ripple" Property="IsMouseOver" Value="True">
+                            <Trigger.Setters>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger.Setters>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HomeTabControlStyle" TargetType="{x:Type controls:MetroAnimatedSingleRowTabControl}">
+        <Setter Property="Background" Value="{StaticResource TabControlBackgroundBrush}" />
+        <Setter Property="TabStripPlacement" Value="Top" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource HomeTabItemStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <DockPanel LastChildFill="True">
+                        <Grid
+                            x:Name="HeaderGrid"
+                            attachedProperties:EnableDragHelper.EnableDrag="True"
+                            attachedProperties:MaximizeDoubleClickHelper.MaximizeDoubleClick="True"
+                            Background="{StaticResource TabItemPanelBackgroundBrush}"
+                            DockPanel.Dock="Left">
+                            <StackPanel
+                                Margin="15,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Image
+                                    Width="32"
+                                    Height="32"
+                                    VerticalAlignment="Center"
+                                    Source="../icon.ico" />
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Text="Popcorn" />
+                            </StackPanel>
+                            <TabPanel
+                                x:Name="HeaderPanel"
+                                HorizontalAlignment="Center"
+                                Panel.ZIndex="1"
+                                IsItemsHost="True"
+                                KeyboardNavigation.TabIndex="1" />
+                        </Grid>
+                        <Border
+                            x:Name="ContentPanel"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            KeyboardNavigation.DirectionalNavigation="Contained"
+                            KeyboardNavigation.TabIndex="2"
+                            KeyboardNavigation.TabNavigation="Local"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <controls:TransitioningContentControl
+                                behaviours:ReloadBehavior.OnSelectedTabChanged="True"
+                                RestartTransitionOnContentChange="True"
+                                Transition="{TemplateBinding controls:TabControlHelper.Transition}"
+                                UseLayoutRounding="True">
+                                <ContentPresenter
+                                    x:Name="PART_SelectedContentHost"
+                                    Margin="{TemplateBinding Padding}"
+                                    ContentSource="SelectedContent"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    UseLayoutRounding="False" />
+                            </controls:TransitioningContentControl>
+                        </Border>
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Top">
+                            <Setter TargetName="HeaderGrid" Property="DockPanel.Dock" Value="Top" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

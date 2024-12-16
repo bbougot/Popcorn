@@ -1,0 +1,33 @@
+<Application
+    x:Class="Popcorn.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Popcorn.ViewModels"
+    Startup="OnStartup"
+    mc:Ignorable="d">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+                <ResourceDictionary Source="Resources/Icons.xaml" />
+                <ResourceDictionary Source="Resources/HomeTabControlStyle.xaml" />
+                <ResourceDictionary Source="Resources/SettingsTabControlStyle.xaml" />
+                <ResourceDictionary Source="Resources/Shadows.xaml" />
+                <ResourceDictionary Source="Resources/AnimatedScrollViewer.xaml" />
+                <ResourceDictionary Source="Resources/Ripple.xaml" />
+                <ResourceDictionary Source="Resources/SplitView.xaml" />
+                <ResourceDictionary Source="Resources/FlyoutHeader.xaml" />
+                <ResourceDictionary Source="Resources/Markdown.xaml" />
+                <ResourceDictionary Source="Resources/Player.xaml" />
+                <ResourceDictionary Source="Resources/Windows10ToggleSwitch.xaml" />
+                <ResourceDictionary Source="Resources/FlowDocumentScrollViewerCustomStyle.xaml" />
+                <ResourceDictionary Source="Resources/HotKey.xaml" />
+                <ResourceDictionary Source="Resources/CombiLabel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        </ResourceDictionary>
+        <!--  Global View Models Locator  -->
+    </Application.Resources>
+</Application>

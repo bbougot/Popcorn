@@ -1,0 +1,159 @@
+﻿<controls:MetroWindow
+    x:Class="Popcorn.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:adorners="http://gu.se/Adorners"
+    xmlns:cast="clr-namespace:Popcorn.UserControls.Home.Movie.Cast"
+    xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:controls1="clr-namespace:Enterwell.Clients.Wpf.Notifications.Controls;assembly=Enterwell.Clients.Wpf.Notifications"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:details="clr-namespace:Popcorn.UserControls.Home.Movie.Details"
+    xmlns:details1="clr-namespace:Popcorn.UserControls.Home.Show.Details"
+    xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:windows="clr-namespace:Popcorn.ViewModels.Windows"
+    Title="Popcorn"
+    Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.8'}"
+    Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.7'}"
+    MinWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.5'}"
+    MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.5'}"
+    d:DataContext="{d:DesignInstance windows:WindowViewModel}"
+    dialog:DialogParticipation.Register="{Binding}"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    Activated="OnActivated"
+    AllowDrop="True"
+    Background="Black"
+    DataContext="{Binding Window, Source={StaticResource Locator}}"
+    Icon="../Resources/Images/icon.ico"
+    IconBitmapScalingMode="HighQuality"
+    IconEdgeMode="Aliased"
+    IgnoreTaskbarOnMaximize="{Binding IgnoreTaskbarOnMaximize}"
+    KeyDown="OnKeyDown"
+    NonActiveBorderBrush="{StaticResource MahApps.Brushes.Accent}"
+    NonActiveGlowBrush="{StaticResource MahApps.Brushes.Accent}"
+    OverlayBrush="Black"
+    ShowIconOnTitleBar="True"
+    ShowTitleBar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowState="{Binding ApplicationService.IsFullScreen, Converter={converters:WindowStateToBooleanConverter}, Mode=TwoWay}"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converters:BoolToInverseVisibilityConverter x:Key="BoolToInverseVisibilityConverter" />
+            <Style TargetType="{x:Type controls:WindowCommands}">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            <Style TargetType="{x:Type controls:WindowButtonCommands}">
+                <Setter Property="Foreground" Value="White" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowTitleBar, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MetroWindow}}}" Value="False">
+                        <Setter Property="Background" Value="White" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <command:EventToCommand Command="{Binding Mode=OneWay, Path=DropFileCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="DragEnter">
+            <command:EventToCommand Command="{Binding Mode=OneWay, Path=DragEnterFileCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="DragLeave">
+            <command:EventToCommand Command="{Binding Mode=OneWay, Path=DragLeaveFileCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding Mode=OneWay, Path=MainWindowClosingCommand}" PassEventArgsToCommand="False" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <controls:MetroWindow.WindowButtonCommands>
+        <controls:WindowButtonCommands Style="{DynamicResource MahApps.Styles.WindowButtonCommands.Clean.Win10}" Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </controls:MetroWindow.WindowButtonCommands>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding SwitchFullScreenCommand}"
+                    Content="{iconPacks:Modern WindowMaximize,
+                                               Width=20,
+                                               Height=20}"
+                    Foreground="White"
+                    Visibility="{Binding ToggleFullscren, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <Button
+                    Command="{Binding SwitchFullScreenCommand}"
+                    Content="{iconPacks:Modern WindowMinimize,
+                                               Width=20,
+                                               Height=20}"
+                    Foreground="White"
+                    Visibility="{Binding ToggleFullscren, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
+            </StackPanel>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout
+                Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
+                Margin="0.01,0,0,0"
+                AnimateOpacity="True"
+                CloseButtonVisibility="{Binding ShowDetails.DownloadShow.IsDownloadingEpisode, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}"
+                CloseCommand="{Binding CloseShowPageCommand}"
+                Header="{Binding ShowDetails.Show.Title, Source={StaticResource Locator}}"
+                HeaderTemplate="{Binding Source={StaticResource FlyoutHeaderTemplate}}"
+                IsOpen="{Binding IsShowFlyoutOpen}"
+                Position="Right">
+                <details1:ShowDetailsUserControl />
+            </controls:Flyout>
+            <controls:Flyout
+                Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
+                Margin="0.01,0,0,0"
+                AnimateOpacity="True"
+                CloseButtonVisibility="{Binding MovieDetails.IsDownloadingMovie, Converter={StaticResource BoolToVisibilityConverter}, Source={StaticResource Locator}}"
+                CloseCommand="{Binding CloseMoviePageCommand}"
+                Header="{Binding MovieDetails.Movie.Title, Source={StaticResource Locator}}"
+                HeaderTemplate="{Binding Source={StaticResource FlyoutHeaderTemplate}}"
+                IsOpen="{Binding IsMovieFlyoutOpen}"
+                Position="Right">
+                <details:MovieDetailsUserControl />
+            </controls:Flyout>
+            <controls:Flyout
+                Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
+                Margin="0.01,0,0,0"
+                AnimateOpacity="True"
+                CloseCommand="{Binding CloseCastPageCommand}"
+                Header="{Binding Cast.Person.Name, Source={StaticResource Locator}}"
+                HeaderTemplate="{Binding Source={StaticResource FlyoutHeaderTemplate}}"
+                IsOpen="{Binding IsCastFlyoutOpen}"
+                Position="Right">
+                <cast:CastUserControl />
+            </controls:Flyout>
+            <adorners:Overlay.Content>
+                <controls1:NotificationMessageContainer
+                    Width="600"
+                    Margin="0,50,0,0"
+                    HorizontalAlignment="Center"
+                    Manager="{Binding Manager, Source={StaticResource Locator}}" />
+            </adorners:Overlay.Content>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+    <Frame
+        x:Name="MainFrame"
+        NavigationUIVisibility="Hidden"
+        Source="/Pages/HomePage.xaml" />
+</controls:MetroWindow>

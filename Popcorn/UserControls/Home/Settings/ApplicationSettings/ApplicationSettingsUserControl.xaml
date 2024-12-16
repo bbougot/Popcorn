@@ -1,0 +1,242 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Settings.ApplicationSettings.ApplicationSettingsUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachedProperties="clr-namespace:Popcorn.AttachedProperties"
+    xmlns:command="http://www.galasoft.ch/mvvmlight"
+    xmlns:controls="clr-namespace:Popcorn.Controls"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:local="clr-namespace:Popcorn.UserControls.Home.Settings.ApplicationSettings"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding ApplicationSettings, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="GotFocus">
+            <command:EventToCommand Command="{Binding Mode=OneWay, Path=UpdateCacheSizeCommand}" PassEventArgsToCommand="False" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolToInverseVisibilityConverter x:Key="BoolToInverseVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer
+        Margin="15,20"
+        HorizontalScrollBarVisibility="Auto"
+        PreviewMouseWheel="OnPreviewMouseWheel"
+        VerticalScrollBarVisibility="Disabled">
+        <controls:CustomWrapPanel Orientation="Vertical">
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Text="{lex:LocText LanguageLabel}" />
+                <TextBlock
+                    Grid.Row="2"
+                    FontSize="14"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText ChooseLanguageLabel}" />
+                <ComboBox
+                    Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    ItemsSource="{Binding AvailableLanguages}"
+                    SelectedItem="{Binding SelectedLanguage}" />
+            </Grid>
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Text="{lex:LocText BandwidthLimitLabel}" />
+                <TextBlock
+                    Grid.Row="2"
+                    FontSize="14"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText DownloadLimitLabel}" />
+                <mah:NumericUpDown
+                    Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Interval="50"
+                    Maximum="100000"
+                    Minimum="0"
+                    Value="{Binding DownloadLimit}" />
+                <TextBlock
+                    Grid.Row="6"
+                    FontSize="14"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText UploadLimitLabel}" />
+                <mah:NumericUpDown
+                    Grid.Row="8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Interval="50"
+                    Maximum="10000"
+                    Minimum="0"
+                    Value="{Binding UploadLimit}" />
+            </Grid>
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Text="{lex:LocText DefaultQualityLabel}" />
+                <TextBlock
+                    Grid.Row="2"
+                    FontSize="14"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText ChooseDefaultQualityLabel}" />
+                <controls:Windows10ToggleSwitch
+                    Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    IsChecked="{Binding DefaultHdQuality}"
+                    OffLabel="HD"
+                    OnLabel="SD" />
+            </Grid>
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Text="{lex:LocText DefaultSubtitleLanguageLabel}" />
+                <TextBlock
+                    Grid.Row="2"
+                    FontSize="14"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{lex:LocText ChooseDefaultSubtitleLanguageLabel}" />
+                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <mah:SplitButton
+                        Width="130"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        ItemsSource="{Binding AvailableSubtitlesLanguages}"
+                        SelectedItem="{Binding DefaultSubtitleLanguage}">
+                        <mah:SplitButton.Icon>
+                            <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
+                        </mah:SplitButton.Icon>
+                    </mah:SplitButton>
+                    <mah:ProgressRing
+                        Width="20"
+                        Height="20"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        IsActive="True"
+                        Visibility="{Binding LoadingSubtitles, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                    Text="{lex:LocText CacheSizeLabel}" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="14"
+                        FontWeight="Light"
+                        Foreground="White"
+                        Text="{lex:LocText ClearCacheLabel}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        attachedProperties:TextParenthesis.Text="{Binding CacheSize}"
+                        FontSize="14"
+                        FontWeight="Light"
+                        Foreground="White" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="100"
+                        Height="30"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        mah:ControlsHelper.ContentCharacterCasing="Normal"
+                        Command="{Binding ClearCacheCommand}"
+                        Content="{lex:LocText ClearButton}"
+                        Style="{DynamicResource MahApps.Styles.Button.Square}" />
+                    <Button
+                        Height="30"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        mah:ControlsHelper.ContentCharacterCasing="Normal"
+                        Command="{Binding ChangeCacheLocationCommand}"
+                        Content="{lex:LocText ChangeLocation}"
+                        Style="{DynamicResource MahApps.Styles.Button.Square}" />
+                </StackPanel>
+            </Grid>
+        </controls:CustomWrapPanel>
+    </ScrollViewer>
+
+</UserControl>
+

@@ -1,0 +1,180 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblyTitle>Popcorn</AssemblyTitle>
+    <Product>Popcorn</Product>
+    <Copyright>Copyright © 2020</Copyright>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Remove="Resources\AnimatedScrollViewer.xaml" />
+    <Resource Remove="Resources\CombiLabel.xaml" />
+    <Resource Remove="Resources\FlowDocumentScrollViewerCustomStyle.xaml" />
+    <Resource Remove="Resources\FlyoutHeader.xaml" />
+    <Resource Remove="Resources\HomeTabControlStyle.xaml" />
+    <Resource Remove="Resources\HotKey.xaml" />
+    <Resource Remove="Resources\Icons.xaml" />
+    <Resource Remove="Resources\IconsNonShared.xaml" />
+    <Resource Remove="Resources\ImageLoading.xaml" />
+    <Resource Remove="Resources\Markdown.xaml" />
+    <Resource Remove="Resources\Player.xaml" />
+    <Resource Remove="Resources\Ripple.xaml" />
+    <Resource Remove="Resources\SettingsTabControlStyle.xaml" />
+    <Resource Remove="Resources\Shadows.xaml" />
+    <Resource Remove="Resources\SplitView.xaml" />
+    <Resource Remove="Resources\Windows10ToggleSwitch.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="akavache.sqlite3" Version="6.10.6" />
+    <PackageReference Include="AsyncEnumerator" Version="4.0.2" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
+    <PackageReference Include="Enterwell.Clients.Wpf.Notifications" Version="1.4.2" />
+    <PackageReference Include="FFME.Windows" Version="4.2.330" />
+    <PackageReference Include="Gu.Wpf.Adorners" Version="2.1.0" />
+    <PackageReference Include="libtorrent-net" Version="6.0.2" />
+    <PackageReference Include="Humanizer" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.af" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.ar" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.bg" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.bn-BD" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.cs" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.da" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.de" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.el" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.es" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.fa" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.fi-FI" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.fr" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.fr-BE" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.he" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.hr" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.hu" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.id" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.it" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.ja" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.lv" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.ms-MY" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.mt" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.nb" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.nb-NO" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.nl" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.pl" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.pt" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.ro" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.ru" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.sk" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.sl" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.sr" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.sr-Latn" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.sv" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.tr" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.uk" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.uz-Cyrl-UZ" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.uz-Latn-UZ" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.vi" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.zh-CN" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.zh-Hans" Version="2.7.9" />
+    <PackageReference Include="Humanizer.Core.zh-Hant" Version="2.7.9" />
+    <PackageReference Include="LoadingIndicators.WPF.Core.Temporary" Version="1.0.1" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0748" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="3.7.0" />
+    <PackageReference Include="Microsoft.WindowsAPICodePack-Core" Version="1.1.0.2" />
+    <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0.0" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.7.0" />
+    <PackageReference Include="Polly" Version="7.2.0" />
+    <PackageReference Include="RestSharp" Version="106.10.2-alpha.0.8" />
+    <PackageReference Include="RunProcessAsTask" Version="1.2.4" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.2" />
+    <PackageReference Include="SubtitlesParser" Version="1.4.8" />
+    <PackageReference Include="TMDbLib" Version="1.6.0" />
+    <PackageReference Include="VideoLibrary" Version="3.0.1" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.5.0" />
+    <PackageReference Include="XAMLMarkupExtensions" Version="1.8.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Markdown\Project.md" />
+    <EmbeddedResource Include="Markdown\License.md" />
+    <EmbeddedResource Include="Markdown\Legal.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSDB\OSDB.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="FFmpeg\avcodec-58.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\avdevice-58.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\avfilter-7.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\avformat-58.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\avutil-56.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\postproc-55.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\SoundTouch.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\swresample-3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FFmpeg\swscale-5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

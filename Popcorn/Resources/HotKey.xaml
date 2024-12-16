@@ -1,0 +1,163 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pc="clr-namespace:Popcorn.Controls">
+
+    <Style x:Key="SegoeAssets">
+        <Setter Property="TextElement.FontFamily" Value="Segoe MDL2 Assets" />
+    </Style>
+    <SolidColorBrush x:Key="ControlsBackgroundMediumBrush" Color="#1A1A1A" />
+    <Color x:Key="ForegroundColor">#E2E2E2</Color>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}" />
+    <Style x:Key="Hotkey" TargetType="{x:Type pc:CombiLabel}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pc:CombiLabel}">
+                    <StackPanel Orientation="Horizontal">
+                        <Border
+                            Width="48"
+                            Height="26"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource ControlsBackgroundMediumBrush}">
+                            <Label
+                                Margin="4,3,3,3"
+                                Padding="0"
+                                VerticalAlignment="Bottom"
+                                Content="{TemplateBinding Content}"
+                                Foreground="{StaticResource ForegroundBrush}" />
+                        </Border>
+                        <Label
+                            Margin="5,0,5,0"
+                            Padding="0"
+                            VerticalAlignment="Center"
+                            Content="+"
+                            Foreground="{StaticResource ForegroundBrush}" />
+                        <Border
+                            Width="26"
+                            Height="26"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource ControlsBackgroundMediumBrush}">
+                            <Label
+                                Margin="4,3,3,3"
+                                Padding="0"
+                                VerticalAlignment="Bottom"
+                                Content="{TemplateBinding Content2}"
+                                Foreground="{StaticResource ForegroundBrush}" />
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SegoeHotkey" TargetType="{x:Type pc:CombiLabel}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pc:CombiLabel}">
+                    <StackPanel Orientation="Horizontal">
+                        <Border
+                            Width="48"
+                            Height="26"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource ControlsBackgroundMediumBrush}">
+                            <Label
+                                Margin="4,3,3,3"
+                                Padding="0"
+                                VerticalAlignment="Bottom"
+                                Content="{TemplateBinding Content}"
+                                Foreground="{StaticResource ForegroundBrush}" />
+                        </Border>
+                        <Label
+                            Margin="5,0,5,0"
+                            Padding="0"
+                            VerticalAlignment="Center"
+                            Content="+"
+                            Foreground="{StaticResource ForegroundBrush}" />
+                        <Border
+                            Width="26"
+                            Height="26"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource ControlsBackgroundMediumBrush}">
+                            <Label
+                                Margin="4,3,3,3"
+                                Padding="0"
+                                VerticalAlignment="Bottom"
+                                Content="{TemplateBinding Content2}"
+                                Foreground="{StaticResource ForegroundBrush}"
+                                Style="{StaticResource SegoeAssets}" />
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LongKey" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border
+                        Width="48"
+                        Height="26"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource ControlsBackgroundMediumBrush}">
+                        <Label
+                            Margin="4,3,3,3"
+                            Padding="0"
+                            VerticalAlignment="Bottom"
+                            Content="{TemplateBinding Content}"
+                            Foreground="{StaticResource ForegroundBrush}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NormalKey" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border
+                        Width="26"
+                        Height="26"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource ControlsBackgroundMediumBrush}">
+                        <Label
+                            Margin="4,3,3,3"
+                            Padding="0"
+                            VerticalAlignment="Bottom"
+                            Content="{TemplateBinding Content}"
+                            Foreground="{StaticResource ForegroundBrush}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SegoeNormalKey" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border
+                        Width="26"
+                        Height="26"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource ControlsBackgroundMediumBrush}">
+                        <Label
+                            Margin="4,3,3,3"
+                            Padding="0"
+                            VerticalAlignment="Bottom"
+                            Content="{TemplateBinding Content}"
+                            Foreground="{StaticResource ForegroundBrush}"
+                            Style="{StaticResource SegoeAssets}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Search.SearchUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:RatioConverter x:Key="RatioConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="SearchContainer">
+        <Border
+            Width="{Binding ElementName=SearchBox, Path=ActualWidth}"
+            Height="25"
+            BorderBrush="White"
+            BorderThickness="0,0,0,1">
+            <TextBox
+                x:Name="SearchBox"
+                Width="{Binding ElementName=SearchContainer, Path=ActualWidth, Converter={StaticResource RatioConverter}, ConverterParameter=1.0}"
+                controls:TextBoxHelper.ClearTextButton="True"
+                controls:TextBoxHelper.Watermark="{lex:LocText SearchBoxWatermark}"
+                Background="Transparent"
+                BorderThickness="0"
+                CaretBrush="White"
+                Foreground="White"
+                MaxLength="45"
+                Text="{Binding Path=SearchFilter, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.Style>
+                    <Style BasedOn="{StaticResource MahApps.Styles.TextBox.Search}" TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <Trigger Property="controls:TextBoxHelper.HasText" Value="True">
+                                <Setter Property="controls:TextBoxHelper.ButtonContent" Value="r" />
+                                <Setter Property="controls:TextBoxHelper.ButtonContentTemplate" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                    <KeyBinding Key="Tab" Command="{Binding SearchCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
+        </Border>
+    </Grid>
+</UserControl>

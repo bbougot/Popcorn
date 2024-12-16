@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Movie.Trailer.Trailer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:player="clr-namespace:Popcorn.ViewModels.Pages.Player"
+    xmlns:player1="clr-namespace:Popcorn.UserControls.Player"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:RatioConverter x:Key="RatioConverter" />
+
+            <DataTemplate DataType="{x:Type player:MediaPlayerViewModel}">
+                <player1:PlayerUserControl />
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*" />
+            <ColumnDefinition Width="36*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="36*" />
+            <ColumnDefinition Width="37*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="58*" />
+            <RowDefinition Height="52*" />
+            <RowDefinition Height="42*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="13*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="52*" />
+            <RowDefinition Height="58*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="10"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ContentControl
+                Width="{Binding ElementName=LayoutRoot, Path=ActualWidth, Converter={StaticResource RatioConverter}, ConverterParameter=1.0}"
+                Height="{Binding ElementName=LayoutRoot, Path=ActualHeight, Converter={StaticResource RatioConverter}, ConverterParameter=1.0}"
+                Content="{Binding TrailerPlayer}" />
+        </Grid>
+    </Grid>
+</UserControl>

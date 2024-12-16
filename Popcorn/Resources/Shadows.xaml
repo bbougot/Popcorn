@@ -1,0 +1,36 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <DropShadowEffect
+        x:Key="z-depth1"
+        BlurRadius="5"
+        Direction="270"
+        ShadowDepth="1"
+        Color="#CCCCCC" />
+    <DropShadowEffect
+        x:Key="z-depth2"
+        BlurRadius="8"
+        Direction="270"
+        ShadowDepth="2.5"
+        Color="#BBBBBB" />
+    <DropShadowEffect
+        x:Key="z-depth3"
+        BlurRadius="14"
+        Direction="270"
+        ShadowDepth="4.5"
+        Color="#BBBBBB" />
+    <DropShadowEffect
+        x:Key="z-depth4"
+        BlurRadius="25"
+        Direction="270"
+        ShadowDepth="8"
+        Color="#BBBBBB" />
+    <DropShadowEffect
+        x:Key="z-depth5"
+        BlurRadius="35"
+        Direction="270"
+        ShadowDepth="13"
+        Color="#BBBBBB" />
+
+</ResourceDictionary>

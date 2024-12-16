@@ -1,0 +1,138 @@
+﻿<UserControl
+    x:Class="Popcorn.UserControls.Home.Settings.About.AboutUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Popcorn.Controls"
+    xmlns:converters="clr-namespace:Popcorn.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:markdown="clr-namespace:Popcorn.Markdown"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding About, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolToInverseVisibilityConverter x:Key="BoolToInverseVisibilityConverter" />
+            <converters:UpdateLabelConverter x:Key="UpdateLabelConverter" />
+            <markdown:Markdown
+                x:Key="Markdown"
+                DocumentStyle="{StaticResource DocumentStyle}"
+                Heading1Style="{StaticResource H1Style}"
+                Heading2Style="{StaticResource H2Style}"
+                Heading3Style="{StaticResource H3Style}"
+                Heading4Style="{StaticResource H4Style}"
+                ImageStyle="{StaticResource ImageStyle}"
+                LinkStyle="{StaticResource LinkStyle}"
+                SeparatorStyle="{StaticResource SeparatorStyle}" />
+
+            <markdown:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter" Markdown="{StaticResource Markdown}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding
+            CanExecute="CanGoToPage"
+            Command="NavigationCommands.GoToPage"
+            Executed="PerformGoToPage" />
+    </UserControl.CommandBindings>
+    <ScrollViewer
+        Margin="15,20"
+        HorizontalScrollBarVisibility="Auto"
+        PreviewMouseWheel="OnPreviewMouseWheel"
+        VerticalScrollBarVisibility="Disabled">
+        <controls:CustomWrapPanel Orientation="Vertical">
+            <StackPanel Margin="20,10">
+                <Label
+                    Content="{lex:LocText AboutLabel}"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
+                <StackPanel
+                    Margin="0,10,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Image Width="50">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="300" UriSource="/Resources/Images/Logo.png" />
+                        </Image.Source>
+                    </Image>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="26"
+                        FontWeight="Light"
+                        Foreground="White"
+                        Text="Popcorn" />
+                </StackPanel>
+                <StackPanel Margin="5,5,0,0" Orientation="Vertical">
+                    <TextBlock
+                        FontSize="14"
+                        FontWeight="Light"
+                        Foreground="White"
+                        Text="Popcorn is an application which aims to provide a simple interface to watch any movie or show. " />
+                </StackPanel>
+                <StackPanel Margin="5,15,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        FontWeight="Light"
+                        Foreground="White"
+                        Text="{lex:LocText VersionLabel}" />
+                    <TextBlock
+                        Margin="0,0,5,0"
+                        Foreground="White"
+                        Text=":" />
+                    <TextBlock
+                        Margin="0,0,5,0"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="{Binding Version}" />
+                </StackPanel>
+                <TextBlock
+                    Margin="5,5,0,0"
+                    Foreground="White"
+                    Text="{Binding Copyright}" />
+                <TextBlock
+                    Margin="5,5,0,0"
+                    Foreground="White"
+                    Text="The use of this software is under the GNU General Public License" />
+                <Button
+                    Margin="5,15,0,0"
+                    HorizontalAlignment="Left"
+                    mah:ControlsHelper.ContentCharacterCasing="Normal"
+                    Command="{Binding ShowLicenseCommand}"
+                    Content="{lex:LocText ShowLicenseLabel}"
+                    Style="{DynamicResource MahApps.Styles.Button.Square}" />
+            </StackPanel>
+
+            <StackPanel Margin="20,10">
+                <Label
+                    Content="Project"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
+                <FlowDocumentScrollViewer
+                    Margin="-13,-10,0,0"
+                    Document="{Binding Project, Converter={StaticResource TextToFlowDocumentConverter}}"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Style="{StaticResource FlowDocumentScrollViewerCustomStyle}"
+                    VerticalScrollBarVisibility="Hidden" />
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Vertical">
+                <Label
+                    Content="Legal"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
+                <FlowDocumentScrollViewer
+                    Margin="-13,-10,0,0"
+                    Document="{Binding Legal, Converter={StaticResource TextToFlowDocumentConverter}}"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Style="{StaticResource FlowDocumentScrollViewerCustomStyle}"
+                    VerticalScrollBarVisibility="Hidden" />
+            </StackPanel>
+        </controls:CustomWrapPanel>
+    </ScrollViewer>
+</UserControl>

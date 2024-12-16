@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingImage x:Key="ImageError">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFA9A9A9" Geometry="F1 M 32.3333,3C 48.5337,3 61.6667,16.133 61.6667,32.3333C 61.6667,48.5337 48.5337,61.6667 32.3333,61.6667C 16.133,61.6667 3,48.5337 3,32.3333C 3,16.133 16.133,3 32.3333,3 Z M 23.6265,16.5537L 16.909,23.2713L 25.9246,32.2869L 16.5112,41.7002L 23.2287,48.4177L 32.6421,39.0044L 41.3925,47.7548L 48.11,41.0373L 39.3596,32.2869L 47.7123,23.9342L 40.9948,17.2167L 32.6421,25.5694L 23.6265,16.5537 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FFA9A9A9" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+
+    <DrawingImage x:Key="ImageLoading">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+
+                <GeometryDrawing Brush="Transparent">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,1,1" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+
+                <DrawingGroup>
+                    <DrawingGroup.Transform>
+                        <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5" />
+                    </DrawingGroup.Transform>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="Gray" Thickness="0.1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry>
+                                <PathFigure StartPoint="0.9,0.5">
+                                    <ArcSegment
+                                        IsLargeArc="True"
+                                        Point="0.5,0.1"
+                                        RotationAngle="90"
+                                        Size="0.4,0.4"
+                                        SweepDirection="Clockwise" />
+                                </PathFigure>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="Gray">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry>
+                                <PathFigure StartPoint="0.5,0">
+                                    <LineSegment Point="0.7,0.1" />
+                                    <LineSegment Point="0.5,0.2" />
+                                </PathFigure>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+
+    </DrawingImage>
+
+
+</ResourceDictionary>

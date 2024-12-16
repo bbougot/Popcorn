@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="Popcorn.Controls.Show.ShowNumberSummary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:local="clr-namespace:Popcorn.Controls.Show"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="CurrentShows" Visibility="Collapsed" />
+            <TextBlock
+                x:Name="Shows"
+                Margin="5,0,0,0"
+                Text="{lex:LocText ShowsWord}"
+                Visibility="{Binding Visibility, ElementName=CurrentShows}" />
+            <TextBlock
+                x:Name="Of"
+                Margin="5,0,0,0"
+                Text="{lex:LocText OfWord}"
+                Visibility="{Binding Visibility, ElementName=MaxShows}" />
+            <TextBlock
+                x:Name="MaxShows"
+                Margin="5,0,0,0"
+                Visibility="Collapsed" />
+        </StackPanel>
+    </Grid>
+</UserControl>
